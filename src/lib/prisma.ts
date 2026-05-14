@@ -3,13 +3,13 @@ import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 
 const prismaClientSingleton = () => {
-  // Senior approach: Parse the URL or use explicit config to handle special characters in passwords
+  // Use individual variables to bypass connection string parsing issues
   const pool = new Pool({
-    user: 'postgres',
-    host: 'db.mltpeejpkozxxpwdwdkj.supabase.co',
-    database: 'postgres',
-    password: 'Subodh@0476#',
-    port: 6543,
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: parseInt(process.env.DB_PORT || '6543'),
     ssl: true,
     max: 20,
     idleTimeoutMillis: 30000,
