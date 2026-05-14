@@ -15,6 +15,9 @@ import blogRoutes from '../src/routes/blog.routes';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Essential for Vercel: Trust the proxy to get correct IP for rate limiting
+app.set('trust proxy', 1);
+
 // Security Middleware
 app.use(helmet()); 
 app.use(hpp());    
