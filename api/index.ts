@@ -43,6 +43,16 @@ app.get('/', (req, res) => {
   res.json({ message: 'PY SOLUTION API is running' });
 });
 
+// Emergency Debug Route
+app.get('/api/debug', (req, res) => {
+  res.json({
+    database_url_set: !!process.env.DATABASE_URL,
+    frontend_url_set: !!process.env.FRONTEND_URL,
+    node_env: process.env.NODE_ENV,
+    vercel_env: process.env.VERCEL_ENV || 'not-vercel'
+  });
+});
+
 // Health check and Prisma test
 app.get('/health', async (req, res) => {
   try {
