@@ -59,7 +59,13 @@ export const getAllProducts = async (req: Request, res: Response) => {
     });
     res.json(products);
   } catch (error: any) {
-    res.status(500).json({ error: error.message });
+    console.error("GET ALL PRODUCTS ERROR:", error);
+    res.status(500).json({ 
+      error: "Database error occurred", 
+      message: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined,
+      code: error.code 
+    });
   }
 };
 
